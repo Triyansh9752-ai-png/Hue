@@ -11,8 +11,7 @@
       font-family: 'Segoe UI', sans-serif;
       color: #fff;
       text-align: center;
-      background-image: url('https://i.imgur.com/JhT3Qgf.png');
-      background-repeat: repeat;
+      overflow-x: hidden;
     }
     .container {
       max-width: 700px;
@@ -22,6 +21,8 @@
       border-radius: 25px;
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
       display: none;
+      position: relative;
+      z-index: 2;
     }
     h1 {
       font-size: 3em;
@@ -90,6 +91,26 @@
     .btn:hover {
       background: #ff1493;
     }
+    .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .heart-fall {
+      position: absolute;
+      color: red;
+      animation: fall linear infinite;
+      font-size: 1.5em;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-10%); opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -100,21 +121,35 @@
     <h1>For My Akshu <span class="heart">♥</span></h1>
     <h2>Since 19th March 2025, every day feels magical</h2>
     <div class="letter">
-      <p>To My Akshu,</p>
+      <p>To My Baby Girl,</p>
       <p>From the moment we became "us" on 19th March 2025, my world changed in the most beautiful way. Every smile of yours lights up my heart, and every moment with you feels like a dream I never want to wake up from.</p>
       <p>When we met... I had no idea you'd become this important to me—and now I can't even imagine what life would be like without you.</p>
-      <p>You are not just my girlfriend—you are my best friend, my safe space, and the most precious part of my life. Your laughter is my favorite sound, your eyes my favorite sight, and your love… my favorite feeling.</p>
+      <p>You are not just my girlfriend—you are my best friend, my safe space, and the most precious part of my life. Your eyes my favorite sight, and your love… my favorite feeling.</p>
       <p>I made this little website just for you, to remind you how much you mean to me, every single day. This is just the beginning of our love story—and I promise, the best is yet to come.</p>
-      <p>Forever yours,<br/><strong>[Your Name]</strong></p>
+      <p>Forever yours,<br/><strong>[Triyansh]</strong></p>
     </div>
     <button class="btn" onclick="alert('I LOVE YOU, AKSHU! Forever and always.')">Click to See How Much I Love You</button>
-  </div>  <audio autoplay loop>
+  </div>  <div class="hearts" id="hearts"></div>  <audio autoplay loop>
     <source src="https://dl.dropboxusercontent.com/s/6zi9u88mp1tnf3q/What%20Makes%20You%20Beautiful%20-%20One%20Direction.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>  <script>
     function showContent() {
       document.getElementById('heartScreen').style.display = 'none';
       document.getElementById('mainContent').style.display = 'block';
+      startHeartRain();
+    }
+
+    function startHeartRain() {
+      const heartsContainer = document.getElementById('hearts');
+      for (let i = 0; i < 30; i++) {
+        let heart = document.createElement('div');
+        heart.classList.add('heart-fall');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = 2 + Math.random() * 3 + 's';
+        heart.style.fontSize = (1 + Math.random() * 2) + 'em';
+        heart.innerText = '♥';
+        heartsContainer.appendChild(heart);
+      }
     }
   </script></body>
 </html>
